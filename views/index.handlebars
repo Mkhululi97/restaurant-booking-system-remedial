@@ -2,18 +2,8 @@
 
     <h2 class="title is-2">Book a table</h2>
 
-    <div class="notification is-danger is-light">
-        {{!-- you can remove the button below if you want --}}
-        <button class="delete"></button>
-        Error Flash messages goes here...
-        <a href="https://bulma.io/documentation/elements/notification/">Read here if you wanna change the style</a>
-    </div>
-    <div class="notification is-success is-light">
-        {{!-- you can remove the button below if you want --}}
-        <button class="delete"></button>
-        Success Flash messages goes here...
-        <a href="https://bulma.io/documentation/elements/notification/">Read here if you wanna change the style</a>
-    </div>
+    <div class="notification is-danger is-light hidden" >{{messages.errorText}}</div>
+    <div class="notification is-success is-light hidden">{{messages.successText}}</div>
 
 
     <div class="columns">
@@ -42,7 +32,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <p class="control">
-                                    <input class="input is-static" type="email" value="5" readonly>
+                                    <input class="input is-static" type="email" value="{{this.capacity}}" readonly>
                                 </p>
                             </div>
                         </div>
@@ -55,8 +45,8 @@
                         <img src="./images/reserved.png" width="60">
                         {{else}}
                         <label class="radio">
-                            <input type="radio" name="tableId" id="tableId">
-                            Book this table
+                            <input type="radio" name="tableId" id="tableId" value="{{this.table_name}}">
+                            Book this table 
                         </label>
                         {{/if}}
                     </div>

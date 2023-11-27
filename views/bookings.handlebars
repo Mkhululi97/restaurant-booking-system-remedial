@@ -1,64 +1,35 @@
-<h1 class="title is-2" >Bookings</h1>
+<h1 class="title is-2">Bookings</h1>
 
-    <div class="notification is-danger is-light">
-        {{!-- you can remove the button below if you want --}}
-        <button class="delete"></button>
-        Error Flash messages goes here...
-        <a href="https://bulma.io/documentation/elements/notification/">Read here if you wanna change the style</a>
-    </div>
-    <div class="notification is-success is-light">
-        {{!-- you can remove the button below if you want --}}
-        <button class="delete"></button>
-        Success Flash messages goes here...
-        <a href="https://bulma.io/documentation/elements/notification/">Read here if you wanna change the style</a>
-    </div>
-
+<div class="notification is-danger is-light hidden">{{messages.errorText}}</div>
+<div class="notification is-success is-light hidden">{{messages.successText}}</div>
+<form action="/bookings" method="POST">
     <div class="field">
         <label class="label" for="">Bookings for</label>
-        <input class="input is-normal is-2" type="text" placeholder="enter username" > 
+        <input class="input is-normal is-2" type="text" placeholder="enter username" name="inputsearch">
     </div>
-    <div class="field" >
+    <div class="field">
         <input class="button is-info" type="submit" value="Search">
     </div>
+</form>
+<form action="/cancel" method="POST">
+    <table class="table is-fullwidth">
+        <tr>
+            <th>Table name</th>
+            <th>Table capacity</th>
+            <th>Booking size</th>
+            <th>Booked by</th>
+            <th>Contact number</th>
 
-<table class="table is-fullwidth" >
-    <tr>
-        <th>Table name</th>
-        <th>Table capacity</th>
-        <th>Booking size</th>
-        <th>Booked by</th>
-        <th>Contact number</th>
-        <th></th>
-    </tr>
-    <tr>
-        <td>Table 1</td>
-        <td>4</td>
-        <td>2</td>
-        <td>Indiana Jones</td>
-        <td>082 900 1276</td>
-        <td>
-            <button class="button is-warning" >Cancel booking</button>
-        </td>
-    </tr>
-    <tr>
-        <td>Table 2</td>
-        <td>4</td>
-        <td>2</td>
-        <td>Lara Croft</td>
-        <td>082 786 3432</td>
-        <td>
-            <button class="button is-warning" >Cancel booking</button>
-        </td>
-
-    </tr>
-    <tr>
-        <td>Table 3</td>
-        <td>4</td>
-        <td>2</td>
-        <td>Indiana Jones</td>
-        <td>082 900 1276</td>
-        <td>
-            <button class="button is-warning" >Cancel booking</button>
-        </td>
-    </tr>
-</table>
+        </tr>
+        <tr{{#each bookedTables}}>
+            <td>{{this.table_name}}</td>
+            <td>{{this.capacity}}</td>
+            <td>{{this.number_of_people}}</td>
+            <td>{{this.username}}</td>
+            <td>0{{this.contact_number}}</td>
+            <td>
+                <button class="button is-warning" value="{{this.table_name}}">Cancel booking</button>
+            </td>
+        </tr{{/each}}>
+    </table>
+</form>
